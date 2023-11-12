@@ -382,6 +382,10 @@ class EC {
       g = G;
     }
     x25519_field.apm(p.y, p.x, B, A);
+    print('p.y -> ${p.y}');
+    print('p.x -> ${p.x}');
+    print('B -> ${B}');
+    print('A -> ${A}');
     x25519_field.apm(q.y, q.x, d, c);
     x25519_field.mul2(A, C, A);
     x25519_field.mul2(B, D, B);
@@ -528,9 +532,12 @@ class EC {
       final List<PointExt> ds = [];
       final sum = PointExt.create();
       pointSetNeutralExt(sum);
+      print('sum -> ${sum.x}');
       for (int t = 0; t < PRECOMP_TEETH; t++) {
         final q = pointCopyAccum(p);
         pointAddVar2(true, sum, q, sum);
+        print('q -> ${q.x}');
+        print('sum -> ${sum.x}');
         pointDouble(p);
         ds.add(pointCopyAccum(p));
         if (b + t != PRECOMP_BLOCKS + PRECOMP_TEETH - 2) {
